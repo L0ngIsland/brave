@@ -4,10 +4,10 @@ import { sql } from "@vercel/postgres";
 export async function GET() {
   await new Promise((resolve) => setTimeout(resolve, 2000));
   try {
-    const db = await sql`SELECT * from operators`;
-    return db && Math.random() > 0.5
+    const { rows } = await sql`SELECT * from operators`;
+    return rows && Math.random() > 0.5
       ? NextResponse.json(
-          { data: db.rows  },
+          { data: rows },
           {
             status: 200,
           }

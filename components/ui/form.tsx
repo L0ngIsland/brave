@@ -52,7 +52,6 @@ export const Form = ({ values, onSubmit, title, submitTrigger }: FormProps) => {
       }));
     }
   };
-
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
 
@@ -92,7 +91,7 @@ export const Form = ({ values, onSubmit, title, submitTrigger }: FormProps) => {
                 />
                 {label && label}
               </Label>
-              {errors && isErrors(errors) && (
+              {errors  && (
                 <List>
                   {errors[key]?.map((err) => (
                     <ListItem key={key}>

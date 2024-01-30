@@ -7,13 +7,13 @@ export async function GET(
 ) {
   await new Promise((resolve) => setTimeout(resolve, 2000));
 
-  const operator = await sql`SELECT * FROM operators WHERE id = ${params.id};`;
+  const { rows } = await sql`SELECT * FROM operators WHERE id = ${params.id};`;
 
-  return operator && Math.random() > 0.5
+  return rows && Math.random() > 0.5
     ? NextResponse.json(
         {
           data: {
-            operator: operator.rows[0],
+            operator: rows[0],
           },
         },
         {
@@ -35,16 +35,16 @@ export async function POST(
   { params }: { params: { id: string } }
 ) {
   await new Promise((resolve) => setTimeout(resolve, 2000));
-  const operator = await sql`SELECT * FROM operators WHERE id = ${params.id};`;
+  const { rows } = await sql`SELECT * FROM operators WHERE id = ${params.id};`;
 
-  if (operator.rows[0]) {
+  if (rows[0]) {
     const { phone, amount } = await request.json();
 
     return phone && amount && Math.random() > 0.5
       ? NextResponse.json(
           {
             data: {
-              operator: operator.rows[0],
+              operator: rows[0],
               phone,
               amount,
               message: "Оплата прошла успешно",
